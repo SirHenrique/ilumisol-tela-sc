@@ -8,7 +8,57 @@ Realize um git clone do projeto, troque o nome e o title no app.component.
 
 ## Dark Mode
 
-O dark já está configurado no projeto em forma de um checkbox no inicio do html. Caso seja de seu interesse, pode modificar a lógica para um botão, switch, etc..., também temos o lara light e lara dark como temas, caso deseje trocar os temas, visite: https://www.primefaces.org/primeng/setup , clique em Themes escolha o seu tema, troque o caminho do input e o bundle name no angular.json, troque o href para qual será o tema inicial no index.html e no app.component.ts na classe changeTheme troque os bundles.
+O darkmode já está configurado no projeto em forma de um checkbox no inicio do html. Caso seja de seu interesse, pode modificar a lógica para um botão, switch, etc..., também temos o lara light e lara dark como temas, caso deseje trocar os temas, visite: https://www.primefaces.org/primeng/setup , clique em Themes escolha o seu tema, troque o caminho do input e o bundle name no angular.json, troque o href para qual será o tema inicial no index.html e no app.component.ts na classe changeTheme troque os bundles.
+
+Para remover o darkmode,
+.Remova o app.component.html :
+
+```html
+<div class="field-checkbox">
+  <p-checkbox
+    [(ngModel)]="checked"
+    [binary]="true"
+    inputId="binary"
+    (onChange)="changeTheme(checked)"
+  ></p-checkbox>
+  <label for="binary"> Dark Mode</label>
+</div>
+```
+
+.No angular.json, remova:
+
+```json
+{
+    "input": "./node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+    "bundleName": "lara-light",
+    "inject": false
+},
+{
+    "input": "./node_modules/primeng/resources/themes/lara-dark-blue/theme.css",
+    "bundleName": "lara-dark",
+    "inject": false
+}
+```
+
+.No index.html, remova:
+
+```html
+<link id="app-theme" rel="stylesheet" type="text/css" href="lara-light.css" />
+```
+
+.No app.component.ts remova o theme.service injetado no constructor, e remova:
+
+```ts
+changeTheme(checked: boolean) {
+    if (checked) {
+      this.themeService.switchTheme('lara-dark');
+    } else {
+      this.themeService.switchTheme('lara-light');
+    }
+  }
+```
+
+.Por fim, delete o arquivo theme.service.ts
 
 ## beans
 
@@ -166,4 +216,14 @@ O RadioButton é um componente que é usado para selecionar uma dentre as opçõ
 
 # Finalizando o projeto
 
-Ao final do projeto, lembre-se de excluir a pasta exemplos e remover todos os componentes que não estão sendo utilizados do app.module.ts
+Ao final do projeto, lembre-se de excluir a pasta exemplos e remover todos os componentes que não estão sendo utilizados do app.module.ts.
+
+Renomeie a pasta, mude o nome do projeto no package.json e no angular.json mude o caminho:
+
+```json
+"build": {
+            "outputPath": "dist/projeto-padrao",
+}
+```
+
+Para o nome do seu projeto. Obs Não esqueça de colocar a barra ("/") no final, exemplo "dist/projeto/".

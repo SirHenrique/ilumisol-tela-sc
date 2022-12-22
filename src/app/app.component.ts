@@ -94,4 +94,5 @@ export class AppComponent {
       this.themeService.switchTheme('lara-light');
     }
   }
+  a = () => console.dir(this.vp);
 }
