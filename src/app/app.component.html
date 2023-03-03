@@ -1,12 +1,12 @@
-<button [hidden]="true" type="button" (click)="a()">teste</button>
-<div class="field-checkbox">
-  <p-checkbox
-    [(ngModel)]="checked"
-    [binary]="true"
-    inputId="binary"
-    (onChange)="changeTheme(checked)"
-  ></p-checkbox>
-  <label for="binary"> Dark Mode</label>
+<div class="card">
+  <button [hidden]="true" type="button" (click)="a()">teste</button>
+
+  <p-messages [styleClass]="'w-12'"></p-messages>
+  
+  <h5 style="font-weight: normal" class="mt-0 mb-2">
+    (<span style="color: red">*</span>) Atenção aos campos obrigatórios
+  </h5>
+
 </div>
 
 <app-exemplos [vp]="vp"></app-exemplos>
