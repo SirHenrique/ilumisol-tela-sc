@@ -1,6 +1,6 @@
 import { ResponseLoadData, VP_BPM } from 'src/beans/VP_BPM';
 import { Info } from 'src/beans/Workflow';
-import { axios_header_token } from 'src/beans/WS_Beans';
+import { axios_header_token } from 'src/beans/General_Beans';
 import { environment } from 'src/environments/environment';
 import anexoLoad from './Anexo_Load';
 import { getFormPresentation } from './Form_Presentation';
@@ -11,7 +11,7 @@ const STEP = environment.tarefa();
 declare var removeData: any;
 declare var rollbackData: any;
 
-export async function loadData(vp: VP_BPM, info: Info): Promise<ResponseLoadData> {
+async function loadData(vp: VP_BPM, info: Info): Promise<ResponseLoadData> {
   var rld: ResponseLoadData = { initial: 1, tabs: [1, 2, 3], vp };
 
   rld.vp.user_fullName = (await info.getUserData()).fullname;
@@ -32,11 +32,14 @@ export async function loadData(vp: VP_BPM, info: Info): Promise<ResponseLoadData
   return rld;
 }
 
-export function saveData(vp: VP_BPM): any {
+function saveData(vp: VP_BPM): any {
   return { formData: vp };
 }
 
-export function rollback(data: any, info: any): any {
+function rollback(data: any, info: any): any {
+  console.log(data.error);
   if (info.isRequestNew()) return removeData(data.processInstanceId);
   return rollbackData(data.processInstanceId);
 }
+
+export { loadData, saveData, rollback };

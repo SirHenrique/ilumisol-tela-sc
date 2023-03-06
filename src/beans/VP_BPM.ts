@@ -9,14 +9,9 @@ export interface ResponseLoadData {
 }
 
 export class VP_BPM {
-  //Variáveis ​​Gerais
   public overlay: boolean = true;
-  public buscandoWS: boolean = true;
 
   public alertas: Message[] = [];
-
-  public date_now: Date = new Date();
-  public date_max: Date = new Date(8640000000000000);
 
   public token: string = '';
   public user_fullName: string = '';

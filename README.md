@@ -1,6 +1,6 @@
-# SolicitacaoViagem
+# ProjetoPadrao
 
-SolicitacaoViagem é um projeto com configurações e componentes já prontos para utilização para a criação de um formulário externo. O objetivo é automatizar e acelerar o processo com processos padronizados já realizados, como por exemplo a integração com a plataforma já configurada, componentes de uso comum já estilizados e prontos para uso, etc...
+ProjetoPadrao é um projeto com configurações e componentes já prontos para utilização para a criação de um formulário externo. O objetivo é automatizar e acelerar o processo com processos padronizados já realizados, como por exemplo a integração com a plataforma já configurada, componentes de uso comum já estilizados e prontos para uso, etc...
 
 # Modo de uso
 
@@ -222,7 +222,7 @@ Renomeie a pasta, mude o nome do projeto no package.json e no angular.json mude 
 
 ```json
 "build": {
-            "outputPath": "dist/solicitacao-viagem",
+            "outputPath": "dist/projeto-padrao",
 }
 ```
 
