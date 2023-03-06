@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SolicitacaoViagem": {
+    "ProjetoPadrao": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
               "angular-slickgrid",
               "stream"
             ],
-            "outputPath": "dist/solicitacao-viagem",
+            "outputPath": "dist/projeto-padrao",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,7 +35,16 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css"
+              {
+                "input": "./node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                "bundleName": "lara-light",
+                "inject": false
+              },
+              {
+                "input": "./node_modules/primeng/resources/themes/lara-dark-blue/theme.css",
+                "bundleName": "lara-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -76,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SolicitacaoViagem:build:production"
+              "browserTarget": "ProjetoPadrao:build:production"
             },
             "development": {
-              "browserTarget": "SolicitacaoViagem:build:development"
+              "browserTarget": "ProjetoPadrao:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +96,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SolicitacaoViagem:build"
+            "browserTarget": "ProjetoPadrao:build"
           }
         },
         "test": {
