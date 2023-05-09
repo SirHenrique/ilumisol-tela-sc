@@ -10,8 +10,10 @@ export interface ResponseLoadData {
 
 export class VP_BPM {
   public overlay: boolean = true;
+  public Buscando_WS: boolean = true;
 
   public alertas: Message[] = [];
+  public msgTeste: string = ''
 
   public token: string = '';
   public user_fullName: string = '';

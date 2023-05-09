@@ -1,8 +1,8 @@
 import { ResponseLoadData, VP_BPM } from 'src/beans/VP_BPM';
 import { Info } from 'src/beans/Workflow';
-import { axios_header_token } from 'src/beans/General_Beans';
+import { ws_beans_header } from 'src/beans/WS_Beans';
 import { environment } from 'src/environments/environment';
-import anexoLoad from './Anexo_Load';
+import {AnexoService} from '../app/app.service'
 import { getFormPresentation } from './Form_Presentation';
 import getVP from './Get_VP_BPM';
 
@@ -11,14 +11,14 @@ const STEP = environment.tarefa();
 declare var removeData: any;
 declare var rollbackData: any;
 
-async function loadData(vp: VP_BPM, info: Info): Promise<ResponseLoadData> {
+async function loadData(vp: VP_BPM, info: Info, anexoService: AnexoService): Promise<ResponseLoadData> {
   var rld: ResponseLoadData = { initial: 1, tabs: [1, 2, 3], vp };
 
   rld.vp.user_fullName = (await info.getUserData()).fullname;
 
   const ptd = await info.getPlatformData();
   rld.vp.token = `bearer ${ptd.token.access_token}`;
-  axios_header_token.headers!['Authorization'] = rld.vp.token;
+  ws_beans_header.headers!['Authorization'] = rld.vp.token;
 
   const ipv = await info.getInfoFromProcessVariables();
   if (STEP !== environment.s1_etapa1) {
@@ -27,7 +27,7 @@ async function loadData(vp: VP_BPM, info: Info): Promise<ResponseLoadData> {
     rld.vp = getVP(rld.vp, map);
   }
   rld = getFormPresentation(rld);
-  anexoLoad(rld);
+  anexoService.anexoLoad(rld);
 
   return rld;
 }

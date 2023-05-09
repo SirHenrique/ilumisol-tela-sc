@@ -7,8 +7,8 @@ export const environment = {
       return error;
     }
   },
-  urlpadrao: window.location.origin ?? '',
-  gedpapel: [
+  url_padrao: window.location.origin ?? '',
+  ged_papel: [
     {
       active: true,
       permissionLevel: 3,

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { CalendarModule } from 'primeng/calendar';
@@ -35,6 +36,8 @@ import { T3Painel3Component } from './exemplos/t3-exemplos/t3-painel3/t3-painel3
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ExemplosComponent } from './exemplos/exemplos.component';
+import { AnexoService, PastaService } from './app.service';
+import { Validate_Service } from 'src/services/Validate_Service';
 
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
@@ -59,6 +62,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     BrowserModule,
     FormsModule,
     InputTextModule,
+    InputTextareaModule,
     CalendarModule,
     MessageModule,
     MessagesModule,
@@ -84,7 +88,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
       },
     }),
   ],
-  providers: [],
+  providers: [PastaService, Validate_Service, AnexoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

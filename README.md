@@ -6,6 +6,10 @@ ProjetoPadrao é um projeto com configurações e componentes já prontos para u
 
 Realize um git clone do projeto, troque o nome e o title no app.component.
 
+# Troca de nome
+
+Clique no search(Lupa) do vsCode e procure pela palavra "projeto-padrao" e em replace digite o nome do seu projeto, clique no icone "replace all" e confirme. Por fim altere o titulo ProjetoPadrao no index.html.
+
 ## Dark Mode
 
 O darkmode já está configurado no projeto em forma de um checkbox no inicio do html. Caso seja de seu interesse, pode modificar a lógica para um botão, switch, etc..., também temos o lara light e lara dark como temas, caso deseje trocar os temas, visite: https://www.primefaces.org/primeng/setup , clique em Themes escolha o seu tema, troque o caminho do input e o bundle name no angular.json, troque o href para qual será o tema inicial no index.html e no app.component.ts na classe changeTheme troque os bundles.
@@ -227,3 +231,7 @@ Renomeie a pasta, mude o nome do projeto no package.json e no angular.json mude 
 ```
 
 Para o nome do seu projeto. Obs Não esqueça de colocar a barra ("/") no final, exemplo "dist/projeto/".
+
+# Uma Observação muito importante!!!
+
+LEMBRE-SE DE TROCAR O DIRETÓRIO DO PROJETO PARA FAZER OS COMMITS E PUSHS.

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
 import * as gedf from 'prisma_prismafunctions';
 import { FileUpload } from 'primeng/fileupload';
-import { pegarPastas } from '../../app.service';
+import { PastaService } from '../../app.service'
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,7 +19,7 @@ export class T2ExemplosComponent implements OnInit {
 
   private anexos_ged_temp: gedf.Anexo[] = [];
 
-  constructor() {
+  constructor(private pastaService: PastaService) {
     switch (this.STEP) {
       case environment.s1_etapa1:
         this.readonlyHideComponent = false;
@@ -87,7 +87,8 @@ export class T2ExemplosComponent implements OnInit {
   ): Promise<void> => {
     console.log('entrounoenviar');
     await this.prepararDocumentos().catch(this.printError);
-    const p = await pegarPastas(this.vp, this.vp.ged_pasta_pai_nome);
+    const p = await this.pastaService.pegarPastas(this.vp, this.vp.ged_pasta_pai_nome);
+
     if (p) {
       this.vp.ged_pasta_pai_id = p.paiId;
       this.vp.GED_pasta_codigo_id = p.proId;
