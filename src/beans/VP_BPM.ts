@@ -26,4 +26,6 @@ export class VP_BPM {
   public anexo_ged: Anexo[] = [];
   public anexo_id: string = '';
   public anexo_nome: string = 'nome';
+
+  public testecheck: boolean = true
 }

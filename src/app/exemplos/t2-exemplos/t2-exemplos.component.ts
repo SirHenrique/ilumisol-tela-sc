@@ -27,7 +27,7 @@ export class T2ExemplosComponent implements OnInit {
     }
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void { }
 
   public sn = gedf.simplifyName;
   public fb = gedf.formatBytes;
@@ -126,6 +126,7 @@ export class T2ExemplosComponent implements OnInit {
     var checkDocuments: number = 0;
     for (const i in this.anexos_ged_temp) {
       var a = this.anexos_ged_temp[i];
+      console.log(a)
       if (a.enviado) checkDocuments++;
       else {
         await gedf
