@@ -19,12 +19,7 @@ Para remover o darkmode,
 
 ```html
 <div class="field-checkbox">
-  <p-checkbox
-    [(ngModel)]="checked"
-    [binary]="true"
-    inputId="binary"
-    (onChange)="changeTheme(checked)"
-  ></p-checkbox>
+  <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary" (onChange)="changeTheme(checked)"></p-checkbox>
   <label for="binary"> Dark Mode</label>
 </div>
 ```
@@ -159,7 +154,7 @@ O inputNumber currency é o componente usado na utilização de valores. Lembre-
 
 ### t2-exemplos
 
-O t2-exemplos é a Tab onde temos os componentes de anexos. Os componentes de anexos estão diretamente relacionados a plataforma, então para a utilização dos componentes de anexo é necessário criar as váriaveis de processo:
+O t2-exemplos é a Tab onde temos os componentes de anexos e paginação. Os componentes de anexos estão diretamente relacionados a plataforma, então para a utilização dos componentes de anexo é necessário criar as váriaveis de processo:
 
 ```ts
   public anexo_files: File[] = [];
@@ -169,6 +164,10 @@ O t2-exemplos é a Tab onde temos os componentes de anexos. Os componentes de an
 ```
 
 Claro, crie com um nome que faça mais sentido, os nomes das variáveis acima são só um exemplo do tipo que devem ser criadas. Em seguida, substitua suas variáveis tanto no html quanto no ts.
+
+#### paginação
+
+Para usar a paginação monte o body da requisição na função inputLazyLoad que fara a ordenação e a filtragem e monte a interface da sua response no WS_Beans.ts, como exemplo temos a interface Servico.
 
 #### html
 

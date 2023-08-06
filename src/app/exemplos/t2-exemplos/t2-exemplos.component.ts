@@ -2,8 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { VP_BPM } from 'src/beans/VP_BPM';
 import * as gedf from 'prisma_prismafunctions';
 import { FileUpload } from 'primeng/fileupload';
-import { PastaService } from '../../app.service'
+import { LazyLoadEvent } from 'primeng/api';
+import { Filtro, JSONQuery } from 'src/functions/Table_LazyLoad';
+import { PastaService, AppService } from '../../app.service'
 import { environment } from 'src/environments/environment';
+import { Servicos } from 'src/beans/WS_Beans';
 
 @Component({
   selector: 'app-t2-exemplos',
@@ -19,7 +22,7 @@ export class T2ExemplosComponent implements OnInit {
 
   private anexos_ged_temp: gedf.Anexo[] = [];
 
-  constructor(private pastaService: PastaService) {
+  constructor(private pastaService: PastaService, private ap: AppService) {
     switch (this.STEP) {
       case environment.s1_etapa1:
         this.readonlyHideComponent = false;
@@ -150,4 +153,114 @@ export class T2ExemplosComponent implements OnInit {
   private printError = (e: any): void => {
     console.error({ title: 'Anexos print_error', error: e });
   };
+
+  //------------------------------------------------------------------------------
+
+  public mostrar_modal: boolean = false;
+  public pagina: number = 1;
+  public linhas: number = 5;
+  public total: number = 0;
+  public filtros: Filtro[] = [];
+  public ordem: string = '';
+  public campo: string = '';
+  public vacio: string = 'Carregando...';
+  public linhaSelecionada = false;
+  public descricaoPesquisado?: Servicos;
+  public descricaoSelecionada: string = '';
+  public servicos?: any;
+
+
+  public clientesOnRowSelect(event: any) {
+    this.linhaSelecionada = true;
+  }
+
+  public clientesOnRowUnselect(event: any) {
+    this.linhaSelecionada = false;
+  }
+
+  public selecionarOnClick() {
+    this.descricaoSelecionada = this.descricaoPesquisado?.desSer ?? ''
+    this.mostrar_modal = false;
+  }
+
+  public cancelarOnClick() {
+    this.mostrar_modal = false;
+  }
+
+  public async inputLazyLoad(e?: LazyLoadEvent) {
+    this.mostrar_modal = true;
+
+    const json = new JSONQuery();
+
+    if (e) {
+      this.linhas = e.rows ?? 0;
+      this.pagina = (e.first ?? 0) / (e.rows ?? 0) + 1;
+
+      if (e.filters) {
+
+        this.filtros = []
+        const filtersArray = Object.values(e.filters);
+        let campo = ''
+        let operador = ''
+        let valor = ''
+
+        for (const key in e.filters) {
+          if (e.filters.hasOwnProperty(key)) {
+            const index = filtersArray.indexOf(e.filters[key]);
+            campo = key
+
+            switch (e.filters[key].matchMode) {
+              case 'startsWith':
+                operador = 'INICIANDO'
+                break;
+              case 'contains':
+                operador = 'CONTENDO'
+                break;
+              case 'notContains':
+                operador = 'NÃO CONTENDO'
+                break;
+              case 'endsWith':
+                operador = 'TERMINANDO'
+                break;
+              case 'equals':
+                operador = 'IGUAL'
+                break;
+              case 'notEquals':
+                operador = 'DIFERENTE'
+                break;
+
+            }
+            valor = e.filters[key].value ?? ''
+
+            if (e.filters[key].value) {
+              this.filtros.push({ campo, operador, valor });
+            }
+
+          }
+        }
+      }
+
+      if (e.sortField) {
+
+        this.campo = e.sortField;
+        this.ordem = `${e.sortOrder === 1 ? 'ASC' : 'Desc'}`;
+      }
+      else {
+        this.ordem = '';
+        this.campo = '';
+      }
+    }
+
+    json.setPaginacao(this.pagina, this.linhas);
+    if (this.filtros) json.adicionarFiltro(this.filtros);
+    if (this.ordem != '' && this.campo != '') json.adicionarOrdenacao(this.ordem, this.campo);
+    const r = await this.ap.exportaWS('ExportaContaContabil', json.toString());
+    this.total = r.totReg;
+    this.servicos = r.servicos
+    console.log(this.servicos)
+
+    if (r.servicos.length > 0) this.vp.show_servicos = r.servicos;
+    else (this.vp.show_servicos = []), (this.vacio = r.msgRet);
+
+  }
 }

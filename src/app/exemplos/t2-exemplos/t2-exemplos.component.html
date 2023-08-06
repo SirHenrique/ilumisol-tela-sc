@@ -150,3 +150,119 @@
     </p-table>
   </div>
 </div>
+
+<!-- Paginação -->
+
+<div class="grid">
+  <span class="col-12">
+    Paginação
+    <span style="color: red">*</span>
+  </span>
+  <div class="col-12 py-0">
+    <div class="p-inputgroup">
+      <input
+        pInputText
+        type="text"
+        class="col-12"
+        placeholder="Selecione"
+        [readonly]="true"
+        [(ngModel)]="descricaoSelecionada"
+        (click)="inputLazyLoad()"
+      />
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-search"
+        class="p-0"
+        (click)="inputLazyLoad()"
+        [disabled]="vp.Buscando_WS"
+      ></button>
+    </div>
+  </div>
+</div>
+<p-dialog
+  #dialog
+  header="Contas"
+  [styleClass]="'w-6'"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closeOnEscape]="true"
+  [closable]="!vp.Buscando_WS"
+  [(visible)]="mostrar_modal"
+>
+  <p-table
+    #table
+    [value]="servicos"
+    [lazy]="true"
+    (onLazyLoad)="inputLazyLoad($event)"
+    dataKey="desSer"
+    [(selection)]="descricaoPesquisado"
+    selectionMode="single"
+    styleClass="p-datatable-sm"
+    [rows]="linhas"
+    [paginator]="true"
+    [totalRecords]="total"
+    [loading]="vp.Buscando_WS"
+    [lazyLoadOnInit]="false"
+    (onRowSelect)="clientesOnRowSelect($event)"
+    (onRowUnselect)="clientesOnRowUnselect($event)"
+    [globalFilterFields]="['codFam', 'desSer']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+        <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            class="col-12"
+            pInputText
+            (input)="table.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Buscar"
+          />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="codFam">
+          Código <p-sortIcon field="codFam"></p-sortIcon>
+        </th>
+        <th pSortableColumn="desSer">
+          Descrição <p-sortIcon field="desSer"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter type="text" field="codFam"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="desSer"></p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-mar>
+      <tr [pSelectableRow]="mar">
+        <td>{{ mar.codFam }}</td>
+        <td>{{ mar.desSer }}</td>
+      </tr>
+    </ng-template>
+    <!-- Empty Message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [colSpan]="2" style="text-align: center">
+          {{ vacio }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p-button [disabled]="!linhaSelecionada" (click)="selecionarOnClick()"
+        >Selecionar</p-button
+      >
+      <p-button styleClass="p-button-secondary" (click)="cancelarOnClick()"
+        >Cancelar</p-button
+      >
+    </ng-template>
+  </p-table>
+</p-dialog>

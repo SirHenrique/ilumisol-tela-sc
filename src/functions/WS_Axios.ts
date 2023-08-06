@@ -4,14 +4,16 @@ import { environment } from 'src/environments/environment';
 
 const URL = environment.url_padrao;
 
-export const wsG5Exporta = async (port: string, body: string = '{}') =>
+export const exportaG5 = async (port: string, body: string = '{}') =>
   (
     await axios.post<
       AxiosResponse<wsb.G5Response>,
       AxiosResponse<wsb.G5Response>
     >(
-      `${URL}/SXI/G5Rest?server=${URL}&module=sapiens&service=com.bpm.tequaly&port=${port}&useAlwaysArray=true`,
+      `${URL}/SXI/G5Rest?server=${URL}&module=sapiens&service=com.prisma.paginacao&port=ExportaServico&useAlwaysArray=true`,
       body,
       wsb.ws_beans_header
     )
   ).data;
+
+

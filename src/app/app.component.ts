@@ -55,15 +55,6 @@ export class AppComponent {
   }
 
   public ngOnInit(): void {
-    axios.get('http://localhost:3000/feedbacks')
-      .then(response => {
-        // Handle the response data
-        console.log(response.data);
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error(error);
-      });
     axios.interceptors.request.use(
       (config: any) => {
         this.vp.Buscando_WS = true;

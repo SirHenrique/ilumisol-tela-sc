@@ -7,7 +7,8 @@ export const environment = {
       return error;
     }
   },
-  url_padrao: window.location.origin ?? '',
+  url_padrao: 'https://demonstra.prismainformatica.com.br:8188',
+  databaseType: 'ORACLE',
   ged_papel: [
     {
       active: true,
@@ -16,6 +17,7 @@ export const environment = {
       type: 'ROLE',
     },
   ],
+  codEmp: 1,
   s1_etapa1: 'etapa1',
   s2_etapa2: 'etapa2',
 };

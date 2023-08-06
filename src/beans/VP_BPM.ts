@@ -1,5 +1,6 @@
 import { Message } from 'primeng/api';
 import { Anexo } from 'prisma_prismafunctions';
+import * as wsb from './WS_Beans';
 
 // Crie aqui todas as váriaveis de processo
 export interface ResponseLoadData {
@@ -13,7 +14,6 @@ export class VP_BPM {
   public Buscando_WS: boolean = true;
 
   public alertas: Message[] = [];
-  public msgTeste: string = ''
 
   public token: string = '';
   public user_fullName: string = '';
@@ -28,4 +28,7 @@ export class VP_BPM {
   public anexo_nome: string = 'nome';
 
   public testecheck: boolean = true
+
+  public show_servicos: wsb.Servicos[] = [];
 }
+

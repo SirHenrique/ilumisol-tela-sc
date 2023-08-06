@@ -7,7 +7,7 @@ const Menus: MenuItem[] = [
     visible: false,
   },
   {
-    label: 'Tab de anexos',
+    label: 'Tab de anexos e paginação',
     command: () => showPanel(2),
     visible: false,
   },
