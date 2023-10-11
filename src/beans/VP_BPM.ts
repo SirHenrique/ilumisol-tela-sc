@@ -41,7 +41,7 @@ export class VP_BPM {
 
   public show_servicos: wsb.Servicos[] = [];
 
-  public anexo_files2: AnexoFile[] = [];
-  public anexo_files2_string: string = '';
+  public anexo_files_sem_GED: AnexoFile[] = [];
+  public anexo_files_sem_GED_txt: string = '';
 }
 

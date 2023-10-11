@@ -34,7 +34,7 @@ export class T4ExemplosComponent implements OnInit {
 
   public checkEnviadoTemplate(nomeArq: string): boolean {
     const nomeArquivo = this.sn(nomeArq)
-    for (const anexo of this.vp.anexo_files2) {
+    for (const anexo of this.vp.anexo_files_sem_GED) {
       if (anexo.file.name.includes(nomeArquivo)) {
         return true;
       }
@@ -50,19 +50,14 @@ export class T4ExemplosComponent implements OnInit {
   public escolherDocumentoFileUpload(anexosUploader: FileUpload) {
     const selectedFiles = anexosUploader.files;
 
-    // Crie um array de booleanos para armazenar os resultados da verificação
     const resultados: boolean[] = [];
 
     selectedFiles.forEach(selectedFile => {
-      // Verifique se o arquivo selecionado já existe em anexo_files2
-      const existe = this.vp.anexo_files2.some(anexo => anexo.file.name === selectedFile.name);
 
-      // Adicione o resultado à matriz de resultados
+      const existe = this.vp.anexo_files_sem_GED.some(anexo => anexo.file.name === selectedFile.name);
+
       resultados.push(existe);
     });
-
-    // Agora, resultados conterá true para arquivos que existem e false para os que não existem
-    console.log(resultados);
   }
 
 
@@ -74,7 +69,6 @@ export class T4ExemplosComponent implements OnInit {
   ): void => {
     const index = anexosUploader.files.indexOf(file);
     anexosUploader.remove(event, index);
-    // this.vp.anexo_files = anexosUploader.files;
   };
 
   downloadFile(anexo: AnexoFile) {
@@ -82,16 +76,13 @@ export class T4ExemplosComponent implements OnInit {
       const arrayBuffer = anexo.bytes;
       const blob = new Blob([new Uint8Array(arrayBuffer)], { type: anexo.file.type });
 
-      // Cria um link temporário
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.download = anexo.file.name;
 
-      // Simula um clique no link
       link.click();
 
-      // Libera a URL e remove o link
       window.URL.revokeObjectURL(url);
       link.remove();
     } else {
@@ -100,9 +91,9 @@ export class T4ExemplosComponent implements OnInit {
   }
 
   public removerArquivo(file: AnexoFile): void {
-    const index = this.vp.anexo_files2.findIndex(anexo => anexo.file.name === file.file.name);
+    const index = this.vp.anexo_files_sem_GED.findIndex(anexo => anexo.file.name === file.file.name);
     if (index !== -1) {
-      this.vp.anexo_files2.splice(index, 1); // Remove o arquivo da lista
+      this.vp.anexo_files_sem_GED.splice(index, 1); // Remove o arquivo da lista
     }
   }
 
@@ -125,13 +116,11 @@ export class T4ExemplosComponent implements OnInit {
       });
     };
 
-    // Verifique se o arquivo já existe na lista
     const arquivoJaExiste = (file: File) => {
-      return this.vp.anexo_files2.some(anexo => anexo.file.name === file.name);
+      return this.vp.anexo_files_sem_GED.some(anexo => anexo.file.name === file.name);
     };
 
     const promises = Array.from(anexosUploader.files).map(async (fileAnexo) => {
-      // Verifique se o arquivo já existe antes de adicioná-lo
       if (!arquivoJaExiste(fileAnexo)) {
         const bytes = await lerArquivo(fileAnexo);
         const file = {
@@ -146,14 +135,11 @@ export class T4ExemplosComponent implements OnInit {
 
     Promise.all(promises)
       .then(() => {
-        // Adicione novos arquivos à lista existente (mantendo os existentes)
-        this.vp.anexo_files2 = [...this.vp.anexo_files2, ...arquivos];
+        this.vp.anexo_files_sem_GED = [...this.vp.anexo_files_sem_GED, ...arquivos];
 
-        const anexo_files_string = JSON.stringify(this.vp.anexo_files2);
+        const anexo_files_string = JSON.stringify(this.vp.anexo_files_sem_GED);
 
-        console.log(anexo_files_string);
-
-        this.vp.anexo_files2_string = anexo_files_string;
+        this.vp.anexo_files_sem_GED_txt = anexo_files_string;
       })
       .catch((error) => {
         console.error('Erro ao ler arquivos:', error);
