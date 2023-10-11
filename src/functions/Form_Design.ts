@@ -16,6 +16,11 @@ const Menus: MenuItem[] = [
     command: () => showPanel(3),
     visible: false,
   },
+  {
+    label: 'Tab de anexos s/ GED',
+    command: () => showPanel(4),
+    visible: false,
+  },
 ];
 
 type panelType = { [k: string]: boolean };
@@ -23,6 +28,7 @@ const Panels: panelType = {
   t1_exemplos: false,
   t2_exemplos: true,
   t3_exemplos: true,
+  t4_exemplos: true,
 };
 
 function showMenus(inicial: number, panels: number[]): MenuItem {
@@ -35,6 +41,7 @@ function showPanel(panel: number): MenuItem {
   if (panel === 1) Panels['t1_exemplos'] = false;
   if (panel === 2) Panels['t2_exemplos'] = false;
   if (panel === 3) Panels['t3_exemplos'] = false;
+  if (panel === 4) Panels['t4_exemplos'] = false;
   return Menus[panel - 1];
 }
 

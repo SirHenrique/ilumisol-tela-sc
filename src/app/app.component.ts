@@ -77,7 +77,7 @@ export class AppComponent {
     );
 
     this.vp.Buscando_WS = false;
-    this.activeMenu = fd.showMenus(1, [1, 2, 3]);
+    this.activeMenu = fd.showMenus(1, [1, 2, 3, 4]);
   }
 
   private _loadData = async (_data: Data, info: Info): Promise<void> => {

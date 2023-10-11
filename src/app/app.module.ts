@@ -28,6 +28,7 @@ import { T1C3Component } from './exemplos/t1-exemplos/t1-c3/t1-c3.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { T2ExemplosComponent } from './exemplos/t2-exemplos/t2-exemplos.component';
 import { T3ExemplosComponent } from './exemplos/t3-exemplos/t3-exemplos.component';
+import { T4ExemplosComponent } from './exemplos/t4-exemplos/t4-exemplos.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { T3Painel1Component } from './exemplos/t3-exemplos/t3-painel1/t3-painel1.component';
@@ -51,6 +52,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     T1C3Component,
     T2ExemplosComponent,
     T3ExemplosComponent,
+    T4ExemplosComponent,
     T3Painel1Component,
     T3Painel2Component,
     T3Painel3Component,
@@ -91,4 +93,4 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
   providers: [PastaService, Validate_Service, AnexoService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
