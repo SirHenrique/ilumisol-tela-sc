@@ -16,3 +16,7 @@
   height: 100%;
   margin: 0;
 }
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) {
+	background: rgb(238, 238, 238) !important;
+}

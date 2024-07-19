@@ -5,7 +5,6 @@ import { VP_BPM } from 'src/beans/VP_BPM';
 import * as fd from 'src/functions/Form_Design';
 // import formValidate from 'src/functions/Form_Validate';
 import { Validate_Service } from '../services/Validate_Service'
-import * as wc from 'src/functions/Workflow_Cockpit';
 import { Data, Info } from 'src/beans/Workflow';
 import axios from 'axios';
 import { ThemeService } from '../services/theme.service';
@@ -25,12 +24,287 @@ export class AppComponent {
   public title = 'ProjetoPadrao';
 
   checked: boolean = false;
-
+  public resto = 0;
   public menus: MenuItem[] = fd.Menus;
   public activeMenu: MenuItem = {};
   public panel = fd.Panels;
   public hideButtons: boolean = false;
-
+  public produtos = [
+    {
+      codPro: '1010.0170',
+      desPro: 'INV. SOFAR TRIFASICO 250K 380V (250KTL-HV-PRO)',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+    {
+      codPro: '1010.0187',
+      desPro: 'INV. GOODWE GW250KN-HT',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+    {
+      codPro: '1010.0192',
+      desPro: 'INV. SUNGROW SG333HX 12MPPT',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+    {
+      codPro: '1010.0207',
+      desPro: 'INV. SUNGROW 250KW 18MPPTS',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+    {
+      codPro: '1010.0245',
+      desPro: 'INV. CANADIAN TRIFASICO 250KW 800V (CSI-250K-T800 1A-E)',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+    {
+      codPro: '1011.0073',
+      desPro: 'SMART LOGGER GOODWE SCB3000',
+      datas:[{
+        periodo: 'Atrasados',
+        quantidade: 30,
+        sugerido: 30
+      },
+      {
+        periodo: 'JAN/2024',
+        quantidade: 25,
+        sugerido: 25
+      },
+      {
+        periodo: 'FEV/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'MAR/2024',
+        quantidade: 15,
+        sugerido: 15
+      },
+      {
+        periodo: 'ABR/2024',
+        quantidade: 10,
+        sugerido: 10
+      },
+      {
+        periodo: 'MAI/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUN/2024',
+        quantidade: 5,
+        sugerido: 5
+      },
+      {
+        periodo: 'JUL/2024',
+        quantidade: 0,
+        sugerido: 0
+      },
+    ]
+    },
+  ];
+  public periodos: any = [];
+  public selectedColumns: any = []
+ public selectedProducts: any = []
+ public alterando = false;
   public vp: VP_BPM = new VP_BPM();
 
   constructor(
@@ -40,12 +314,6 @@ export class AppComponent {
     private formValidate: Validate_Service,
     private anexoService: AnexoService
   ) {
-    new workflowCockpit({
-      init: this._loadData,
-      onSubmit: this._saveData,
-      onError: this._rollback,
-    });
-
     translate.addLangs(['pt']);
     translate.setDefaultLang('pt');
     translate.use('pt');
@@ -78,31 +346,42 @@ export class AppComponent {
 
     this.vp.Buscando_WS = false;
     this.activeMenu = fd.showMenus(1, [1, 2, 3, 4]);
+
+    this.produtos[0].datas.forEach(dat => {
+     let data = {
+        selecionado: false,
+        periodo: dat.periodo
+      }
+       this.periodos.push(data);
+    });
+
+    console.log(this.periodos);
   }
 
-  private _loadData = async (_data: Data, info: Info): Promise<void> => {
-    const r = await wc.loadData(this.vp, info, this.anexoService);
-    this.vp = r.vp;
-  };
-
-
-  private _saveData = (_data: Data, _info: Info): any => {
-    this.formValidate.validate(this.vp);
-    console.log(this.msg)
-    this.vp.alertas = this.msg.messages == null ? [] : this.msg.messages;
-    if (this.vp.alertas.length > 0)
-      throw Error('Os dados informados são inválidos.');
-    else return wc.saveData(this.vp);
-  };
-
-  private _rollback = wc.rollback;
-
-  changeTheme(checked: boolean) {
-    if (checked) {
-      this.themeService.switchTheme('lara-dark');
-    } else {
-      this.themeService.switchTheme('lara-light');
+  public alterandoQuantidade(produto: any, index: number, quantidade: number, produtoIndex: number) {
+    console.log(index)
+    console.log(produto.datas.length)
+  var alterando
+    for(let i = index; i < produto.datas.length; i++) {
+      alterando = false;
+      if(i == index) {
+        this.resto = quantidade - produto.datas[i].sugerido;
+      } else {
+        if(this.resto !== produto.datas[i].sugerido)
+        this.resto = this.resto - produto.datas[i].sugerido;
+        else {
+        produto.datas[i].quantidade = 0;
+        this.resto = 0;
+        }
+        if(this.resto > 0) {
+          produto.datas[i].quantidade = 0;
+        }
+        if(this.resto < 0) {
+          produto.datas[i].quantidade = this.resto * -1;
+          this.resto = 0;
+        }
+      }
     }
+    this.produtos[produtoIndex] = produto;
   }
-  a = () => console.dir(this.vp);
 }
