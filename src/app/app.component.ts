@@ -33,6 +33,12 @@ export class AppComponent {
     {
       codPro: '1010.0170',
       desPro: 'INV. SOFAR TRIFASICO 250K 380V (250KTL-HV-PRO)',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
@@ -78,6 +84,12 @@ export class AppComponent {
     {
       codPro: '1010.0187',
       desPro: 'INV. GOODWE GW250KN-HT',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
@@ -123,6 +135,12 @@ export class AppComponent {
     {
       codPro: '1010.0192',
       desPro: 'INV. SUNGROW SG333HX 12MPPT',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
@@ -168,6 +186,12 @@ export class AppComponent {
     {
       codPro: '1010.0207',
       desPro: 'INV. SUNGROW 250KW 18MPPTS',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
@@ -213,6 +237,12 @@ export class AppComponent {
     {
       codPro: '1010.0245',
       desPro: 'INV. CANADIAN TRIFASICO 250KW 800V (CSI-250K-T800 1A-E)',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
@@ -258,6 +288,12 @@ export class AppComponent {
     {
       codPro: '1011.0073',
       desPro: 'SMART LOGGER GOODWE SCB3000',
+      un: 'UN',
+      qtdOC: 0,
+      qtdSolNA: 0,
+      qtdSol: 0,
+      est: 20,
+      abr: 50,
       datas:[{
         periodo: 'Atrasados',
         quantidade: 30,
