@@ -19,6 +19,25 @@ export class AnexoFile {
   }
 }
 
+export interface Datas {
+  sugMes: number,
+  cprMes: number,
+  nomMes: string
+}
+
+export interface Produtos {
+  codPro: string,
+  qtdAbe: number,
+  qtdScn: number,
+  uniMed: string,
+  qtdScp: number,
+  qtdOcp: number,
+  qtdEst: number,
+  desPro: string,
+  codDer: string,
+  datas: Datas[]
+}
+
 export class VP_BPM {
   public overlay: boolean = true;
   public Buscando_WS: boolean = true;

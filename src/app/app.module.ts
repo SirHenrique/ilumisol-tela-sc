@@ -25,8 +25,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { AnexoService, PastaService } from './app.service';
-import { Validate_Service } from 'src/services/Validate_Service';
 
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
@@ -67,7 +65,7 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
       },
     }),
   ],
-  providers: [PastaService, Validate_Service, AnexoService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

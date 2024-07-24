@@ -4,13 +4,13 @@ import { environment } from 'src/environments/environment';
 
 const URL = environment.url_padrao;
 
-export const exportaG5 = async (port: string, body: string = '{}') =>
+export const exportaSugestao = async (body: string) =>
   (
     await axios.post<
-      AxiosResponse<wsb.G5Response>,
-      AxiosResponse<wsb.G5Response>
+      AxiosResponse<any>,
+      AxiosResponse<any>
     >(
-      `${URL}/SXI/G5Rest?server=${URL}&module=sapiens&service=com.prisma.paginacao&port=ExportaServico&useAlwaysArray=true`,
+      `https://senior.ilumisol.com.br:8182/SXI/G5Rest?server=http://localhost:8081&module=sapiens&service=com.prisma.sugestaocompra&port=ExportaSugestoes&useAlwaysArray=true`,
       body,
       wsb.ws_beans_header
     )
