@@ -1,20 +1,41 @@
+<p-toast life="30000" />
 <div class="grid">
-
-  <div class="col-2 pb-0">
-    <button
-      pButton
-      pRipple
-      type="button"
-      class="w-full col-12"
-      label="Pesquisar"
-      (click)="pesquisar()"
-    ></button>
+  <div class="col-4">
+    <span class="col-12">Origem</span>
+    <div class="col-12 py-0">
+      <div class="p-inputgroup">
+        <input type="text" class="col-12" pInputText placeholder="Selecione" [(ngModel)]="desOri" [readonly]="true"
+          (click)="origemInput()" />
+        <button type="button" class="p-0" pButton pRipple icon="pi pi-search" (click)="origemInput()"></button>
+      </div>
+    </div>
   </div>
-  <p-table class="col-12" styleClass="p-datatable-gridlines" *ngIf="produtos.length > 0 && !vp.Buscando_WS" [scrollable]="true" scrollHeight="90vh" #pd dataKey="codPro" [(selection)]="selectedProducts" [value]="produtos" [(selection)]="selectedProducts">
+
+  <div class="col-4">
+    <span class="col-12">Familias</span>
+    <div class="col-12 py-0">
+      <p-multiSelect
+      [options]="familias"
+      [(ngModel)]="selectedFamilias"
+      optionLabel="desFam"
+      placeholder="Selecione as familias"
+      [style]="{ width: '100%'}"
+      class="custom-multiselect"
+       />
+    </div>
+  </div>
+
+  <div class="col-2" style="padding-top: 28px;">
+    <button pButton pRipple type="button" class="w-full col-12" label="Pesquisar" (click)="pesquisar()"></button>
+  </div>
+
+  <p-table class="col-12" styleClass="p-datatable-gridlines" *ngIf="produtos.length > 0 && !vp.Buscando_WS"
+    [scrollable]="true"  scrollHeight="70vh" #pd dataKey="codPro" [(selection)]="selectedProducts" [value]="produtos"
+    [virtualScroll]="true">
     <ng-template pTemplate="header">
       <tr>
         <th rowspan="3" pFrozenColumn>
-          <p-tableHeaderCheckbox/>
+          <p-tableHeaderCheckbox />
         </th>
         <th rowspan="3" pFrozenColumn>Produto</th>
         <th rowspan="3" pFrozenColumn>Desc</th>
@@ -24,54 +45,62 @@
         <th rowspan="3" style="min-width: 140px; text-align: center;">Qtd. Sol. Cpr.</th>
         <th rowspan="3" style="text-align: center;">Estoque</th>
         <th rowspan="3" style="text-align: center;">Aberto</th>
-    </tr>
-    <tr>
-        <th *ngFor="let date of periodos"  colspan="2" style="text-align: center">
+      </tr>
+      <tr>
+        <th *ngFor="let date of periodos" colspan="2" style="text-align: center">
           {{date.periodo}}
           <p-checkbox [binary]="true" [(ngModel)]="date.selecionado"></p-checkbox>
         </th>
-    </tr>
-    <tr>
-      <ng-container *ngFor="let date of periodos">
-        <th style="min-width: 120px; text-align: center">Qtd. Calc</th>
-        <th>Qtd</th>
-      </ng-container>
-    </tr>
+      </tr>
+      <tr>
+        <ng-container *ngFor="let date of periodos">
+          <th style="min-width: 120px; text-align: center">Qtd. Calc</th>
+          <th>Qtd</th>
+        </ng-container>
+      </tr>
 
     </ng-template>
     <ng-template pTemplate="body" let-produto let-rowIndex="rowIndex">
       <tr>
-        <td pFrozenColumn style="padding: 0;align-items: center;display: flex;justify-content: center;"><p-tableCheckbox [value]="produto" /></td>
+        <td pFrozenColumn style="padding: 0;align-items: center;display: flex;justify-content: center;"><p-tableCheckbox
+            [value]="produto" /></td>
         <td pFrozenColumn style="padding: 0;text-align: center">{{ produto.codPro }}</td>
         <td pFrozenColumn style="min-width: 800px;padding: 0">{{ produto.desPro }}</td>
-        <td pFrozenColumn style="padding: 0;text-align: center;border-right: 1px solid #dee2e6 !important;">{{ produto.uniMed }}</td>
+        <td pFrozenColumn style="padding: 0;text-align: center;border-right: 1px solid #dee2e6 !important;">{{
+          produto.uniMed }}</td>
         <td style="padding: 0;text-align: center">{{ produto.qtdOcp }}</td>
         <td style="padding: 0;text-align: center">{{ produto.qtdScn}}</td>
         <td style="padding: 0;text-align: center">{{ produto.qtdScp }}</td>
         <td style="padding: 0;text-align: center">{{ produto.qtdEst }}</td>
         <td style="padding: 0;text-align: center">{{ produto.qtdAbe }}</td>
         <ng-container *ngFor="let date of produto.datas; let i = index">
-          <td  style="text-align: center;padding: 0">{{date.sugMes}}</td>
+          <td style="text-align: center;padding: 0">{{date.sugMes}}</td>
           <td [pEditableColumn]="date.cprMes" pEditableColumnField="quantidade" style="text-align: center;padding: 0">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                  <input
-                      pInputText
-                      style="width: 100%; height: 100%; padding: 0;"
-                      type="number"
-                      (change)="alterandoQuantidade(produto, i, date.cprMes, rowIndex)"
-                      [(ngModel)]="date.cprMes" />
+                <input pInputText style="width: 100%; height: 100%; padding: 0;" type="number"
+                  (change)="alterandoQuantidade(produto, i, date.cprMes, rowIndex)" [(ngModel)]="date.cprMes" />
               </ng-template>
               <ng-template pTemplate="output">
-                  {{ date.cprMes }}
+                {{ date.cprMes }}
               </ng-template>
-          </p-cellEditor>
-
+            </p-cellEditor>
           </td>
         </ng-container>
       </tr>
     </ng-template>
   </p-table>
+
+  <div class="col-2" *ngIf="produtos.length > 0 && !vp.Buscando_WS">
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="w-full col-12 p-button-success"
+      label="Cadastrar"
+      (click)="mostrarObservacao()"
+    ></button>
+  </div>
 </div>
 
 
@@ -80,3 +109,57 @@
 <div class="progress-spinner-parent" *ngIf="vp.Buscando_WS">
   <p-progressSpinner class="progress-spinner"></p-progressSpinner>
 </div>
+
+<p-dialog header="Adicione Observação" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="showObs"
+  [closeOnEscape]="true" [styleClass]="'w-6'" position="top">
+    <textarea
+      rows="8"
+      style="width: 100%;"
+      pInputTextarea
+      [(ngModel)]="obsSol"></textarea>
+
+      <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-success"
+      label="Cadastrar"
+      (click)="cadastrar()"
+    ></button>
+
+</p-dialog>
+
+
+<p-dialog header="Origens" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="origemModal"
+  [closeOnEscape]="true" [styleClass]="'w-6'" position="top">
+  <p-table #table [value]="origens" selectionMode="single" [paginator]="true" [rows]="10" [(selection)]="origem"
+    dataKey="codOri" (onRowSelect)="origemSelect()" styleClass="p-datatable-sm"
+    [globalFilterFields]="['codOri', 'desOri']">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+        <span class="p-input-icon-left p-ml-auto">
+          <i class="pi pi-search"></i>
+          <input type="text" class="col-12" pInputText (input)="
+                table.filterGlobal($any($event.target).value, 'contains')
+              " placeholder="Buscar" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="codOri">
+          Código <p-sortIcon field="codOri"></p-sortIcon>
+        </th>
+        <th pSortableColumn="desOri">
+          Descrição <p-sortIcon field="desOri"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-origens>
+      <tr [pSelectableRow]="origens">
+        <td>{{ origens.codOri }}</td>
+        <td>{{ origens.desOri }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

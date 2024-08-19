@@ -20,3 +20,24 @@
 ::ng-deep .p-datatable .p-datatable-tbody > tr:nth-child(even) {
 	background: rgb(238, 238, 238) !important;
 }
+
+/* Ajuste a altura do p-multiSelect */
+::ng-deep .p-multiselect {
+  height: 40px !important; /* Ajuste este valor conforme necessário */
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .p-multiselect-label-container {
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .p-multiselect-trigger {
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+}
+
+

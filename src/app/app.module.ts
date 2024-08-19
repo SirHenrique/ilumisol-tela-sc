@@ -25,6 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ToastModule } from 'primeng/toast';
 
 export const HttpLoaderFactory = (httpClient: HttpClient) =>
   new TranslateHttpLoader(httpClient, 'assets/i18n/');
@@ -57,6 +59,8 @@ export const HttpLoaderFactory = (httpClient: HttpClient) =>
     ProgressSpinnerModule,
     FileUploadModule,
     RadioButtonModule,
+    MultiSelectModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

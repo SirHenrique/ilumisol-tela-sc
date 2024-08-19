@@ -1,5 +1,4 @@
 import { Message } from 'primeng/api';
-import { Anexo } from 'prisma_prismafunctions';
 import * as wsb from './WS_Beans';
 
 // Crie aqui todas as váriaveis de processo
@@ -38,6 +37,27 @@ export interface Produtos {
   datas: Datas[]
 }
 
+export interface Origem {
+  codOri: string,
+  desOri: string
+}
+
+export interface Familia {
+ codFam: string,
+ desFam: string,
+}
+
+export interface ProdutosComprados {
+ codPro: string ,
+ codDer: string ,
+ qtdCmp: number ,
+}
+
+export class Compra {
+  mesCmp: string = '';
+  produtos?: ProdutosComprados[]
+}
+
 export class VP_BPM {
   public overlay: boolean = true;
   public Buscando_WS: boolean = true;
@@ -52,7 +72,6 @@ export class VP_BPM {
   public ged_pasta_pai_id: string = '';
 
   public anexo_files: File[] = [];
-  public anexo_ged: Anexo[] = [];
   public anexo_id: string = '';
   public anexo_nome: string = 'nome';
 
